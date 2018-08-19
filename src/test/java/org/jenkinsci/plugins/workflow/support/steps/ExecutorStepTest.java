@@ -633,8 +633,6 @@ public class ExecutorStepTest {
 					}
 				}
 
-				assertNotEquals(firstFoo, firstBar);
-
 				for (int i = 0; i < 5; ++i) {
 					story.j.assertBuildStatusSuccess(p.scheduleBuild2(0));
 					List<String> currentLog = p.getLastBuild().getLog(10);
@@ -716,7 +714,7 @@ public class ExecutorStepTest {
         });
     }
 
-    @Test public void reuseNodeInSameRun() {
+	@Test public void reuseNodeInSameRun() {
 		story.addStep(new Statement() {
 			@Override public void evaluate() throws Throwable {
 				for (int i = 0; i < 5; ++i) {
@@ -790,7 +788,7 @@ public class ExecutorStepTest {
                 story.j.waitForCompletion(b);
             }
             String n(Run<?, ?> b, String label) {
-                return Messages.ExecutorStepExecution_PlaceholderTask_displayName_label(b.getFullDisplayName(), label);
+                return Messages.ExecutorStepExecution_PlaceholderTask_displayName_label(b.getParent().getName(), label);
             }
             List<String> currentLabels() {
                 List<String> r = new ArrayList<>();
